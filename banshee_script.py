@@ -1,9 +1,9 @@
 # shamelessly stolen from dom96's Exaile script
 
 import xchat, dbus, os
-__module_name__ = "Banshee" 
-__module_version__ = "1.0" 
-__module_description__ = "Banshee now playing script with some other cool features" 
+__module_name__ = "Banshee"
+__module_version__ = "1.0"
+__module_description__ = "Banshee now playing script with some other cool features"
 
 bus = dbus.SessionBus()
 
@@ -27,8 +27,8 @@ def getSongInfo():
         length = '%d:%02d' % (float(length) / 60, float(length) % 60)
       else:
         length = "0:00"
-      
-      return (title, artist, album, pos, length)
+
+      return (artist, title, album, pos, length)
     else:
       return 0
   except dbus.exceptions.DBusException:
@@ -43,10 +43,10 @@ def printSong(word, word_eol, userdata):
     xchat.prnt("Banshee is not running")
   else:
     if not userdata:
-      xchat.command("me is listening to %s by %s - %s (%s/%s)" % songInfo)
+      xchat.command("me is listening to %s - %s [%s] (%s/%s)" % songInfo)
     else:
-      xchat.command("me is listening to \x0303%s\x03 by \x0303%s\x03 - \x0303%s\x03 (\x0305%s\x03/\x0305%s\x03)" % songInfo)
-  
+      xchat.command("me is listening to \x0303%s\x03 - \x0303%s\x03 [\x0303%s\x03] (\x0305%s\x03/\x0305%s\x03)" % songInfo)
+
   return xchat.EAT_ALL
 
 
