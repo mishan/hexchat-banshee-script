@@ -14,7 +14,10 @@ def getSongInfo():
     if banshee.GetCurrentState() == "playing":
       npDict = banshee.GetCurrentTrack()
       title = npDict['name'].encode('utf8')
-      album = npDict['album'].encode('utf8')
+      try:
+        album = npDict['album'].encode('utf8')
+      except KeyError:
+        album = "Unknown Album".encode('utf8')
       artist = npDict['artist'].encode('utf8')
       secs = int(banshee.GetPosition() / 1000)
       if secs > 0:
@@ -79,3 +82,4 @@ xchat.hook_command("npc", printSong, True)
 xchat.hook_command("bnext", chooseSong, True)
 xchat.hook_command("bprev", chooseSong, False)
 xchat.hook_command("pause", playPause)
+
