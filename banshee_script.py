@@ -2,7 +2,7 @@
 
 import xchat, dbus, os
 __module_name__ = "Banshee"
-__module_version__ = "1.0.1"
+__module_version__ = "1.0.2"
 __module_description__ = "Banshee now playing script with some other cool features"
 
 bus = dbus.SessionBus()
@@ -13,12 +13,12 @@ def getSongInfo():
 
     if banshee.GetCurrentState() == "playing":
       npDict = banshee.GetCurrentTrack()
-      title = npDict['name'].encode('utf8')
+      title = npDict['name']
       try:
-        album = npDict['album'].encode('utf8')
+        album = npDict['album']
       except KeyError:
-        album = "Unknown Album".encode('utf8')
-      artist = npDict['artist'].encode('utf8')
+        album = "Unknown Album"
+      artist = npDict['artist']
       secs = int(banshee.GetPosition() / 1000)
       if secs > 0:
         pos = '%d:%02d' % (float(secs) / 60, float(secs) % 60)
